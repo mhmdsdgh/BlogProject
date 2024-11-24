@@ -1,0 +1,280 @@
+{% extends 'parent/base.html' %} 
+{% load jformat %}
+{% load blog_tags %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+{% endblock %}
+{% block title %}{{ post.title }} {% endblock %}
+
+{% block content %} 
+    <div class="container">
+        <main class="main-posts">
+            <div class="main-posts__right">
+                <ul class="post-nav">
+                        <li class="post-nav__item">
+                            <a href="{% url 'blog:index' %}">بلاگ فلسفه</a>
+                            <i class="fas fa-chevron-left"></i>
+                        </li>
+                        <li class="post-nav__item">
+                            <a href="{% url 'blog:post_list_category' post.category %}">
+                                {% persian_categories post.category %}
+                            </a>
+                            <i class="fas fa-chevron-left"></i>
+                        </li>
+                        <li class="post-nav__item">
+                            <span>
+                                {{ post.title }}
+                            </span>
+                        </li>
+                </ul>
+                <div class="post-detail">
+                    <div class="post-detail__top">
+                        <div class="post-detail__avatar">
+                            {% if request.user != post.author %}
+                                <a href="{% url 'blog:user_profile' post.author.id %}">
+                                    {% if post.author.photo %}
+                                        <img src="{{ post.author.photo.url }}" alt="avatar" class="author__img">
+                                    {% else %}
+                                        <img class="top-author__img" src="../../static/images/3135768.png" alt="author avatar">
+                                    {% endif %}
+                                </a>
+                            {% else %}
+                                <a href="{% url 'blog:profile' %}">
+                                    {% if request.user.photo %}
+                                        <img src="{{ post.author.photo.url }}" alt="avatar" class="author__img">
+                                    {% else %}
+                                        <img class="top-author__img" src="../../static/images/3135768.png" alt="author avatar">
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+
+                            <div class="post-detail__author">
+                                {% if request.user != post.author %}
+                                    <a href="{% url 'blog:user_profile' post.author.username %}">
+                                        {{ post.author.first_name }} {{ post.author.last_name }}
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'blog:profile' %}">
+                                        {{ request.user.first_name }} {{ request.user.last_name }}
+                                    </a>
+                                {% endif %}
+                                <div class="post-detail__dr">
+                                    <p>
+                                        زمان مطالعه:
+                                         {% date_converter post.reading_time %}        دقیقه
+                                    </p>
+                                    -
+                                    <p>
+                                        {% date_converter post.publish|jformat:'%d %B %Y' %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-detail__btns">
+                            <button class="save-post">
+                                    {% if user in post.saved_by.all %}
+                                        <span>
+                                            <svg id='svg-saved' width="28" height="28" viewBox="0 0 18 18" fill="black" xmlns="http://www.w3.org/2000/svg" stroke="black"><path d="M14,1H4A.944.944,0,0,0,3,2V16.46c0,.4.5.7.8.4l5-4.987a.3.3,0,0,1,.4,0l5,4.987a.473.473,0,0,0,.8-.4V2A.944.944,0,0,0,14,1Z"></path>
+                                            </svg>
+                                        </span>
+                                    {% else %}
+                                        <span>
+                                            <svg width="28" height="28" viewBox="0 0 18 18" fill="white" xmlns="http://www.w3.org/2000/svg" stroke="black"><path d="M14,1H4A.944.944,0,0,0,3,2V16.46c0,.4.5.7.8.4l5-4.987a.3.3,0,0,1,.4,0l5,4.987a.473.473,0,0,0,.8-.4V2A.944.944,0,0,0,14,1Z"></path>
+                                            </svg>
+                                        </span>
+                                    {% endif %}
+                            </button>
+                            <div class="copy-clipboard">
+                                <input type="text" value="http://127.0.0.1:8000{{ post.get_absolute_url }}" id="myInput">
+                                <button onclick="myFunction()" class="copy-clipboard__btn">
+                                    <svg width="28" height="28" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.85,2.15a3.588,3.588,0,0,0-5.074,0c-.1925.193-2.132,2.111-2.6755,2.6545A4.15349,4.15349,0,0,1,9.972,5.108c.2595-.26,1.784-1.763,1.8915-1.8705a2.05061,2.05061,0,1,1,2.9,2.9L11.204,9.695a2.30853,2.30853,0,0,1-1.686.65,1.97648,1.97648,0,0,1-1.35-.5545,2.07708,2.07708,0,0,1-.6205-.813,1.03342,1.03342,0,0,0-.214.159l-.8175.856a3.57187,3.57187,0,0,0,.613.8365,3.92429,3.92429,0,0,0,5.3385-.219L15.85,7.226a3.587,3.587,0,0,0,.00322-5.07278Z"></path><path d="M7.963,12.912c-.26.26-1.75,1.7735-1.8565,1.881a2.05061,2.05061,0,0,1-2.9-2.9L6.8,8.3a2.29,2.29,0,0,1,1.683-.646,2.1,2.1,0,0,1,1.892,1.391,1.03342,1.03342,0,0,0,.214-.159l.867-.8605a3.58269,3.58269,0,0,0-.613-.8365,3.6555,3.6555,0,0,0-5.13.024L2.1195,10.806a3.588,3.588,0,1,0,5.074,5.0745c.193-.193,2.097-2.1215,2.6405-2.665A4.15006,4.15006,0,0,1,7.963,12.912Z"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="post-detail__bottom">
+                        <div class="post-detail__title">
+                            <h2>{{ post.title | censor }}</h2>
+                        </div>
+                    </div>
+
+                    <div class="post-detail__content">
+                        {{ post.content | safe }}
+                    </div>
+                    <div class="post-tags">
+                        {% for tag in post.tags.values_list %}
+                            <a href="/tag/{{ tag | tag_slug }}" class="post__tag">{{ tag | tag_slug }}</a>
+                        {% endfor %}
+                    </div>
+                    <span class="likes-count">
+                        {% date_converter post.likes.count %}
+                    </span>
+                    <button class="like-button">
+                        {% if request.user in post.likes.all %}
+                            <i class="fa-solid fa-heart"></i>
+                        {% else %}
+                            <i class="fa-regular fa-heart"></i>
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+
+            <div class="latest-posts">
+                {% latest_posts 6 %}
+            </div>
+        </main>
+
+        {% if similar_posts %}
+            <h2 class="similar-posts__title">
+                    پست های پیشنهادی
+            </h2>
+        {% endif %}
+        <div class="similar-posts">
+            {% for post in similar_posts %}
+                {% with post.get_absolute_url as post_url %}
+                    <div class="similar-post">
+                        <div class="similar-post__img">
+                            <a href="{{ post_url }}">
+                                <img src="{% p_img_src post %}" alt="avatar" class="similar-post__img">
+                            </a>
+                        </div>
+
+                        <div class="similar-post__title">
+                            <a href="{{ post_url }}">
+                                <h3>{{ post.title | truncatechars:60 }}</h3>
+                            </a>
+                        </div>
+                        <div class="similar-post__bottom">
+                            <div class="similar-post__description">
+                                {{ post.content | safe | truncatechars:280}}
+                            </div>
+                            <div class="similar-post__link">
+                                <a href="{{ post.get_absolute_url }}"> ادامه مطلب </a>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+    <div id="dash-line"></div>
+    <div class="container">
+        <div class="post-comments">
+            <h2 class="post-comments__title">نظرات</h2>
+            <div class="post-comments__number">
+                {% with comments.count as cm_count %}
+                {% if cm_count > 0 %}
+                    {% date_converter cm_count %} کامنت
+                {% endif %}
+                {% endwith %}
+            </div>
+
+            {% load mptt_tags %}
+
+            <div class="post__comments">
+                {% recursetree comments %}
+                    <div class="post__comment">
+                        <p class="post__comment__name">{{ node.name }}</p>
+                        <p class="post__comment__body">{{ node.body }}</p>
+                        <button class="post__comment__reply">
+                            پاسخ
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    {% if not node.is_leaf_node %}
+                        <div class="children-comment">
+                            {{ children }}
+                        </div>
+                    {% endif %}
+                {% endrecursetree %}
+            </div>
+
+{#            {% for cm in comments %}#}
+{#                <div class="post__comment">#}
+{#                    <div class="post__comment__name">#}
+{#                        {{ cm.name }}#}
+{#                    </div>#}
+{#                    <div class="post__comment__body">#}
+{#                        {{ cm.body|linebreaks}}#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% empty %}#}
+{#                نظری نوشته نشده است!#}
+{#            {% endfor %}#}
+
+            <div class="post-comments__form">
+                <h2>ارسال دیدگاه</h2>
+                <form method="post" action="{% url 'blog:post_comment' post.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="افزودن کامنت" class="post-comments__btn">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function myFunction() {
+          // Get the text field
+          var copyText = document.getElementById("myInput");
+
+          // Select the text field
+          copyText.select();
+          copyText.setSelectionRange(0, 99999); // For mobile devices
+
+           // Copy the text inside the text field
+          navigator.clipboard.writeText(copyText.value);
+
+          // Alert the copied text
+          alert("Copied the text: " + copyText.value);
+    }
+    $(document).ready(function() {
+      $('.like-button').click(function() {
+          var post_id = $(this).closest('.post').data('post-id');
+          var button = $(this);
+
+          $.ajax({
+              type: 'POST',
+              url: '{% url 'blog:like_post' %}',
+              data: {'post_id': {{ post.id }}, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+              success: function(data) {
+                  if (data.liked){
+                       button.find('i').removeClass('fa-regular fa-heart');
+                       button.find('i').addClass('fa-solid fa-heart');
+                  } else {
+                      button.find('i').removeClass('fa-solid fa-heart');
+                      button.find('i').addClass('fa-regular fa-heart');
+                  }
+                  $('.likes-count').text(data.likes_count);
+              },
+          });
+      });
+      $('.save-post').click(function() {
+          var button = $(this);
+
+          $.ajax({
+              type: 'POST',
+              url: '{% url 'blog:save_post' %}',
+              data: {'post_id': {{ post.id}}, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+              success: function(data) {
+                  if (data.saved) {
+                      button.text('ذخیره شد');
+                  } else {
+                      button.text('ذخیره');
+                  }
+              },
+              error: function (error){
+                  console.log(" :Ajax خطا در ارسال درخواست" + error)
+              }
+          });
+      });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'parent/base.html' %}
+{% load blog_tags %}
+{% block title %}User form{% endblock %}
+{% block content %} 
+    
+    <form method="post">
+    {% csrf_token %}
+        نام
+    <input type="text" name="first_name" required {% if form.first_name.value %} value="{{ from.first_name.value }}" {% endif %}>
+        نام خانوادگی
+    <input type="text" name="last_name" {% if form.last_name.value %} value="{{ from.last_name.value }}" {% endif %} >
+    <br>
+        آیدی
+    <input type="text" name="user_id" required {% if form.user_id.value %} value="{{ from.user_id.value }}" {% endif %}>
+        ایمیل
+    <input type="text" name="email" required {% if form.email.value %} value="{{ from.email.value }}" {% endif %}>
+    
+    <input type="submit", value="ثبت کاربر">
+
+    </form>
+
+
+    {% if form.errors %}
+        لطفا خطاهای زیر را اصلاح کنید:
+        <br>
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    {{field.label}} : {{error}}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif%}
+
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+{% endblock %}

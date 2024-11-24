@@ -1,0 +1,56 @@
+{% load static %}
+{% load blog_tags %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% endblock %}
+
+<body>
+        <div class="footer">
+            <div class="container">
+                <div class="footer-section">
+
+                    <div class="footer-right">
+                        <h3 class="top-topics__heading">موضوعات برتر</h3>
+                        <div class="top-topics">
+                            <ul class="top-topic__list">
+                                {% for tag in footer_tags %}
+                                    <li class="top__topic">
+                                        <a href="/tag/{{ tag|footer_slug }}/" class="footer__tag">
+                                            {{ tag }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="footer-left">
+                        <h3 class="footer-left__heading">
+                            ارتباط با ما و درباره سایت
+                        </h3>
+                        <ul class="footer-contact">
+                            <li>
+                                <a href="#" class="contact__link">
+                                    ارتباط با ما
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/posts/6/درباره-سایت-بلاگ-فلسفه/" class="contact__link">
+                                درباره سایت
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog:ticket' %}" class="contact__link">
+                                 ارسال تیکت
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-bottom">
+                        <p>طراحی شده توسط: <strong>محمدصادق قربانعلی زاده</strong> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>

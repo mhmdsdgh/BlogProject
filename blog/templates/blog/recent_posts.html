@@ -1,0 +1,73 @@
+{% extends 'parent/base.html' %}
+{% block title %}post list{% endblock %}
+{% load static %}
+{% load blog_tags %}
+
+{% load jformat %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/recent_posts.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="main-posts">
+            <div class="post-list">
+                {% if not s_posts %}
+                    <h2>آخرین پست ها</h2>
+                {% else %}
+                    <h2>پست های ذخیره شده</h2>
+                {% endif %}
+                {% for post in posts %}
+                        <div class="post">
+                            <div class="post__top">
+                                <a href="{{ post.get_absolute_url }}" class="post-link">
+                                    <div class="post__img">
+                                        <img src="{% p_img_src post %}" alt='"{{ post.title }} تصویر پست "' class="post__img">
+                                    </div>
+                                </a>
+
+                                <div class="post__title">
+                                    <a href="{{ post.get_absolute_url }}" class="post-link"><h3>{{ post.title | truncatewords:30}}</h3></a>
+                                    <div class="post__data">
+                                        {% if not request.user == post.author %}
+                                            <a href="{% url 'blog:user_profile' post.author.username %}" class="post__author">
+                                                {{ post.author.first_name }} {{ post.author.last_name }}
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url 'blog:profile' %}" class="post__author">
+                                                {{ post.author.first_name }} {{ post.author.last_name }}
+                                            </a>
+                                        {% endif %}
+                                        <div class="post__date">
+                                            {% date_converter post.publish|jformat:'%d %B %Y' %}
+                                            <i class="fa fa-calendar" id="date-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="post__bottom">
+                                <div class="post__description">
+                                    {{ post.content | safe | truncatewords:70}}
+                                </div>
+                                <a href="{{ post.get_absolute_url }}" class="post__link"> ادامه مطلب </a>
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+            <div class="pop_posts">
+                {% most_popular_posts %}
+            </div>
+        </div>
+        <div class="pagination-posts">
+            {% include "partials/pagination.html" with page=posts%}
+        </div>
+
+    </div>
+
+
+{% endblock %}

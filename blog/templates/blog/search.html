@@ -1,0 +1,57 @@
+{% extends 'parent/base.html' %}
+{% block title %}Search: {{query}}{% endblock %}
+{% load static %}
+{% load blog_tags %}
+{% load jformat %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="main-posts">
+            <div class="search-results">
+                {% if query %}
+                    <h2 class="search-results__title">نتایج جستجو برای  {{query}}:</h2>
+                {% endif %}
+                {% for post in results %}
+                    <div class="search-result">
+                        <div class="search-result__top">
+                            <div class="search-result__img">
+                                <img src="{% p_img_src post %}" alt='"{{ post.title }} تصویر پست "' class="search-result__img">
+                            </div>
+                            <div class="search-result__title">
+                                <h3>{{ post.title | truncatewords:30}}</h3>
+                                <div class="search-result__data">
+                                    <a href="{% url 'blog:user_profile' post.author.id %}" class="search-result__author">
+                                        {{ post.author.first_name }} {{ post.author.last_name }}
+                                    </a>
+                                    <div class="search-result__date">
+                                        {% date_converter post.publish|jformat:'%d %B %Y' %}
+                                        <i class="fa fa-calendar" id="date-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="search-result__bottom">
+                            <div class="search-result__description">
+                                {{ post.content | safe | truncatewords:70}}
+                            </div>
+                            <a href="{{ post.get_absolute_url }}" class="search-result__link"> ادامه مطلب </a>
+                        </div>
+                    </div>
+                    {% empty %}
+                            <h3 id="no-results">هیچ نتیجه ای یافت نشد!</h3>
+                {% endfor %}
+            </div>
+
+            <div class="">
+                {% latest_posts %}
+            </div>
+
+        </div>
+    </div>
+
+    {% include "partials/pagination.html" with page=posts%}
+
+{% endblock %}

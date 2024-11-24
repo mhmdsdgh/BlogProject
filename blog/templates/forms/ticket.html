@@ -1,0 +1,54 @@
+{% extends 'parent/base.html' %}
+{% block title %}ticket form{% endblock %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/post_form.css' %}">
+{% endblock %}
+{% block content %} 
+
+
+    <div class="create-ticket">
+        <h2>ارسال تیکت</h2>
+
+        <form method="post" class="ticket-form">
+        {% csrf_token %}
+        <div class="ticket-form__top">
+            <input type="text" name="name" required {% if form.name.value %} value="{{ from.name.value }}" {% endif %}
+                   placeholder="نام و نام خانوادگی">
+            <input type="email" name="email" {% if form.email.value %} value="{{ from.email.value }}" {% endif %}
+                   placeholder="ایمیل">
+        </div>
+
+            <textarea class="ticket-message" name="message" id="ticket-text" required placeholder="متن پیام">{% if form.message.value %} {{ from.message.value }} {% endif %}</textarea>
+        <div class="ticket-form__bottom">
+            <input type="text" name="phone" required maxlength="11" {% if form.phone.value %} value="{{ from.phone.value }}" {% endif %}
+                   placeholder="شماره تلفن">
+            <select name="subject" id="ticket-selection">
+                <option value="پیشنهاد">پیشنهادات</option>
+                <option value="گزارش">گزارش</option>
+                <option value="انتقاد">انتقادات</option>
+            </select>
+        </div>
+            <br>
+
+        <input type="submit" value="ثبت تیکت" id="ticket-submit">
+        </form>
+
+        {% if form.errors %}
+            لطفا خطاهای زیر را اصلاح کنید:
+            <br>
+            {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        {{field.label}} : {{error}}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif%}
+
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
+    </div>
+
+{% endblock %}

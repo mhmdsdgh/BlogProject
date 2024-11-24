@@ -1,0 +1,13 @@
+{% extends 'parent/base.html' %}
+{% load blog_tags %}
+{% block title %}Create Post{% endblock %}
+{% block content %}
+    <h2> آیا از حذف پست ({{ post.title }}) مطمئن هستید؟</h2>
+    <a href="{% url 'blog:profile' %}">خیر</a>
+    <br>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="حذف">
+    </form>
+{% endblock %}

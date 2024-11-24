@@ -1,0 +1,153 @@
+{% load static %}
+{% load blog_tags %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>blog | {% block title %} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <script src="https://kit.fontawesome.com/fcb680da86.js" crossorigin="anonymous"></script>
+    {% block head %} {% endblock %}
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div>
+                    <a href="{% url 'blog:index' %}"><h1 class="header__heading">بلاگ فلسفه</h1></a>
+                </div>
+                <div class="header-top__left">
+                    <div class="search">
+                        <form method="get" action="{% url 'blog:post_search' %}" class="search-bar">
+                            <button type="submit" class="search__btn"><i class="fas fa-search"></i></button>
+                            <input name="query" type="search" placeholder="جستجو" class="search__text">
+                        </form>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        <div class="header-profile">
+                            <a href="{% url 'blog:profile' %}" class="header-profile__link">
+                                {{request.user.first_name|default:request.user.username }}@
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="header-login">
+                            <a href="{% url 'blog:login' %}" class="header-login__link">ورود</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+            <nav class="header-nav">
+                <div class="nav-ctg">
+                    <a href="/category/popular-philosophers/" class="nav-ctg__text" >
+                        <p>فلاسفه معروف</p>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+
+                    <div class="nav-menu" id="nav-menu1">
+                        <ul>
+                            <li>
+                                <a href="/tag/فردریش-نیچه/">فردریش نیچه</a>
+                            </li>
+                            <li>
+                                <a href="/tag/آرتور-شوپنهاور/">آرتور شوپنهاور</a>
+                            </li>
+                            <li>
+                                <a href="/tag/امانوئل-کانت/">امانوئل کانت</a>
+                            </li>
+                            <li>
+                                <a href="/tag/رنه-دکارت/">رنه دکارت</a>
+                            </li>
+                            <li>
+                                <a href="/tag/مارتین-هایدگر/">مارتین هایدگر</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-ctg">
+                    <a href="/category/books/" class="nav-ctg__text" >
+                        <p>کتاب ها</p>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+
+                    <div class="nav-menu">
+                        <ul>
+                            <li>
+                                <a href="/posts/1/چنین-گفت-زرتشت-کتابی-برای-همه-کس-و-هیچ-کس/">چنین گفت زرتشت</a>
+                            </li>
+                            <li>
+                                <a href="/posts/15/کتاب-در-باب-حکمت-زندگی-از-آرتور-شوپنهاور/">در باب حکمت زندگی</a>
+                            </li>
+                            <li>
+                                <a href="/posts/7/اگزیستانسیالیسم-و-اصالت-بشر/">اگزیستانسیالیسم و اصالت بشر</a>
+                            </li>
+                            <li>
+                                <a href="/posts/2/هستی-و-زمان-شاهکار-مارتین-هایدگر/">هستی و زمان</a>
+                            </li>
+                            <li>
+                                <a href="/posts/10/معرفی-کتاب-وقتی-نیچه-گریست/">وقتی نیچه گریست</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-ctg">
+                    <a href="/category/psychology/" class="nav-ctg__text" >
+                        <p>سبک زندگی و روانشناسی</p>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+
+                    <div class="nav-menu">
+                        <ul>
+                            <li>
+                                <a href="/tag/سبک-زندگی-فلسفی/">سبک زندگی فلسفی</a>
+                            </li>
+                            <li>
+                                <a href="/tag/اگزیستانسیالیسم/">اگزیستانسیالیسم</a>
+                            </li>
+                            <li>
+                                <a href="/tag/روانکاوی/">فروید و روانکاوی</a>
+                            </li>
+                            <li>
+                                <a href="/posts/8/بهترین-کتاب-های-روانشناسی/">بهترین کتاب های روانشناسی</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-ctg">
+                    <a href="/category/history/" class="nav-ctg__text" >
+                        <p>سیاست و تاریخ</p>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+
+                    <div class="nav-menu">
+                        <ul>
+                            <li>
+                                <a href="/tag/لیبرالیسم/">لیبرالیسم</a>
+                            </li>
+                            <li>
+                                <a href="/tag/مارکسیسم/">مارکسیسم و تاریخ آن</a>
+                            </li>
+                            <li>
+                                <a href="/tag/توتالیتاریسم/">فاشیسم و توتالیتاریسم</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="nav-ctg">
+                    <a href="#" class="nav-ctg__text">
+                        <p>
+                       ارتباط با ما
+                        </p>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+
+    </header>
+
+</body>
+
+</html>

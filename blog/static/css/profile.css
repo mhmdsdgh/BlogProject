@@ -1,0 +1,343 @@
+.container {
+    max-width: 80rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.body{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.profile-page{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-page__top{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-between;
+}
+
+.profile-page__dashboard{
+    display: flex;
+    flex-direction: column;
+    width: 18rem;
+    height: 16rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.3);
+    background-color: rgba(128, 128, 128, 0.4);
+    margin-top: 2rem;
+}
+
+.profile-page__dashboard a{
+    display: flex;
+    margin-top: 2rem;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.my-profile{
+    display: flex;
+    width: 50rem;
+    align-items: flex-start;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.3);
+    background-color: rgba(128, 128, 128, 0.2);
+    gap: 1.5rem;
+}
+
+.my-profile__avatar {
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.my-profile__img{
+    width: 10rem;
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+.my-profile__left{
+    margin: 0 auto;
+    font-family: Vazir-Light;
+    font-size: 14px;
+}
+
+.my-profile__bio{
+    font-size: 14px;
+    max-width: 34rem;
+}
+
+.social-media {
+    display: block;
+    text-align: center;
+}
+
+.social-media i{
+    font-size: 1.5rem;
+    margin-left: 0.2rem;
+}
+
+.my-profile__name{
+    text-align: center;
+}
+
+
+.my-profile__follow{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 34rem;
+}
+
+.login-link{
+    position: absolute;
+    display: none;
+}
+
+.followers-count,
+.following-count,
+.posts-count {
+    font-family: Vazir-Medium;
+}
+
+.my-profile__btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    font-size: 14px;
+}
+
+.my-profile__edit{
+    width: 5rem;
+    /*padding: 0.2rem 0.5rem;*/
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}
+
+.my-profile__logout{
+    width: 5rem;
+    color: white;
+    background-color: red;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}
+
+
+.my-posts__title{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.my-post{
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    padding-bottom: 0.3rem;
+    margin-bottom: 2rem;
+}
+
+.my-post__img{
+    width: 15rem;
+    height: 8rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    box-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.my-post__top{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+}
+
+
+.my-post__description {
+    font-family: Vazir-Light;
+}
+
+.my-post__description img{
+    display: none;
+}
+
+.my-post__link{
+    display: block;
+    width: 6rem;
+    color: white;
+    background-color: blue;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}
+
+.my-post__edit{
+    width: 6rem;
+    color: white;
+    background-color: red;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}
+
+.my-post__delete{
+    width: 5rem;
+    color: white;
+    background-color: red;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}
+
+.my-posts__dashboard{
+    display: flex;
+    width: 50rem;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.my-posts__btns{
+    display: flex;
+    width: 50rem;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.my-posts__btn{
+    text-align: center;
+}
+
+
+.my-post__links{
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-post__btns{
+    display: flex;
+    align-items: center;
+}
+
+.pagination-posts{
+    display: flex;
+    width: 50rem;
+    justify-content: center;
+}
+
+.following-posts{
+    width: 20rem;
+    margin-left: 1rem;
+}
+
+.following-posts__bottom{
+    box-shadow: 0 3px 0.8rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.following-posts__title{
+    margin-top: 2rem;
+}
+
+.following-posts-bottom{
+    width: 320px;
+    padding: 0 1rem;
+    box-shadow: 0 3px 0.8rem rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.following-post{
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.following-post__img{
+    width: 7.5rem;
+    height: 67px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 0.3rem rgba(0, 0, 0, 0.2);
+}
+
+.following-post-right{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+.following-post-left{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.followings{
+    width: 20rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 3px 0.8rem rgba(0, 0, 0, 0.3);
+    padding: 0.3rem 0.5rem;
+    font-size: 14px;
+}
+
+.followings__title{
+    margin-top: 2rem;
+}
+
+.followings__author{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    margin-bottom: 0.4rem;
+}
+
+.following__detail{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.following__detail a{
+    display: flex;
+}
+
+.following__name{
+    font-family: Vazir-Medium;
+}
+
+.following__img{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+}
+
+.following__posts{
+    font-family: Vazir-Light;
+}
+

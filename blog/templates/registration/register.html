@@ -1,0 +1,21 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block title %}register{% endblock %}
+
+{% block content %}
+<div class="parent">
+    <div class="register">
+        <h1 class="register-heading">ثبت نام</h1>
+        <p class="register-title">اطلاعات خود را وارد کنید:</p>
+            <form method="post" class="register-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="ثبت نام" id="register-submit">
+            </form>
+            <p id="login-link"> آیا حساب کاربری دارید؟<a href="{% url 'blog:login' %}">ورود</a> </p>
+    </div>
+</div>
+{% endblock %}

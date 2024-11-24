@@ -1,0 +1,260 @@
+{% extends 'parent/base.html' %}
+{% load blog_tags %}
+{% load static %}
+{% load jformat %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+ {% endblock %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="profile-page">
+            <div class="profile-right">
+                <div class="profile-page__top">
+                     <div class="my-profile">
+                        <div class="my-profile__right">
+                            <div class="my-profile__avatar">
+                                {% if user.photo %}
+                                    <img class="my-profile__img" src="{{ user.photo.url }}" alt="avatar">
+                                {% else %}
+                                    <img class="my-profile__img" src="../../static/images/3135768.png" alt="avatar">
+                                {% endif %}
+                                <div class="my-profile__name">
+                                    <p>{{ user.first_name }} {{ user.last_name }}</p>
+                                    <div class="my-profile__btns">
+                                        <a class="my-profile__edit" href="{% url 'blog:edit_user' %}">
+                                            ویرایش
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a class="my-profile__logout" href="{% url 'blog:logout' %}">
+                                            خروج
+                                            <i class="fa fa-sign-out"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-profile__left">
+                            <div class="my-profile__follow">
+                                    {% with total_followers=user.followers.count total_following=user.following.count %}
+                                        <span class="followers-count">
+                                            {% date_converter total_followers %}
+                                            <span>دنبال کننده</span>
+                                        </span>
+                                        <span class="following-count">
+                                            {% date_converter total_following %} <span>دنبال شونده</span>
+                                        </span>
+                                    {% endwith %}
+                                    <span class="posts-count">
+                                        {% posts_counter user%}
+                                        <span> پست منتشر شده</span>
+                                    </span>
+                            </div>
+
+                            <div class="my-profile__bio">
+                                <p>{{ user.bio }}</p>
+                            </div>
+                            <div class="social-media">
+                                {% if user.telegram %}
+                                    <a href="{{ user.telegram }}"><i class="fa fa-telegram"></i></a>
+                                {% endif %}
+                                {% if user.instagram %}
+                                    <a href="{{ user.instagram }}"><i class="fa fa-instagram"></i></a>
+                                {% endif %}
+                                {% if user.website %}
+                                    <a href="{{ user.website }}"><i class="fa fa-globe"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% if posts %}
+                    <div class="my-posts">
+                        <div class="my-posts__btns">
+                            <a class="my-posts__btn" href="{% url 'blog:create_post' %}">
+                                افزودن پست
+                                <i class="fa-solid fa-circle-plus"></i>
+                            </a>
+                            <a class="my-posts__btn" href="{% url 'blog:saved_posts' %}">
+                                پست های ذخیره شده
+                                <i class="fas fa-bookmark"></i>
+                            </a>
+                            <a class="my-posts__btn" href="{% url 'blog:show-comments' %}">
+                                نمایش کامنت ها
+                                <i class="fas fa-arrow-alt-circle-left"></i>
+                            </a>
+                        </div>
+                        <h3 class="my-posts__title">پست های من:</h3>
+                        {% for post in posts %}
+                            <div class="my-post">
+                                <div class="my-post__top">
+                                    <div class="my-post__avatar">
+                                        <a href="{{ post.get_absolute_url }}" class="post__link">
+                                             <img src="{% p_img_src post %}" alt='"{{ post.title }} تصویر پست "' class="my-post__img">
+                                        </a>
+                                    </div>
+
+                                    <div class="my-post__title">
+                                        <a href="{{ post.get_absolute_url }}" class="post__link">
+                                            <h3>{{ post.title | truncatewords:30}}</h3>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="my-post__bottom">
+                                    <div class="my-post__description">
+                                        {{ post.content | safe | truncatewords:70}}
+                                    </div>
+                                    <div class="my-post__links">
+                                        <a href="{{ post.get_absolute_url }}" class="my-post__link"> ادامه مطلب </a>
+                                        <div class="my-post__btns">
+                                            <a href="{% url 'blog:delete_post' post.id %}" class="my-post__delete">
+                                                حذف
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <a href="{% url 'blog:edit_post' post.id %}" class="my-post__edit">
+                                                ویرایش
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                {% else %}
+                    <div class="my-posts__btns">
+                        <a class="my-posts__btn" href="{% url 'blog:create_post' %}">
+                            افزودن پست
+                            <i class="fa-solid fa-circle-plus"></i>
+                        </a>
+                        <a class="my-posts__btn" href="{% url 'blog:saved_posts' %}">
+                            پست های ذخیره شده
+                            <i class="fas fa-bookmark"></i>
+                        </a>
+                    </div>
+
+                {% endif %}
+            </div>
+            <div class="sidebar">
+                <div class="following-posts">
+                    <h3 class="following-posts__title">پست های پیشنهادی</h3>
+                    <div class="following-posts__bottom">
+                        {% for post in following_posts %}
+                            {% with post.get_absolute_url as post_url %}
+                                <div class="following-post">
+                                    <div class="following-post-right">
+                                        <div class="following-post__img">
+                                            <a href="{{ post_url }}">
+                                                <img src="{% p_img_src post %}" alt='"{{ post.title }} تصویر پست "' class="following-post__img">
+                                            </a>
+                                        </div>
+                                        <div class="following-post__title">
+                                            <h4><a href="{{ post_url }}">{{ post.title | censor | truncatechars:60}}</a></h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="following-post-left">
+                                        <div class="following-post__author">
+                                                <a href="{% url 'blog:user_profile' post.author.username %}" class="post__author">
+                                                    {{ post.author.first_name }} {{ post.author.last_name }}
+                                                </a>
+                                        </div>
+                                        <div class="following-post__date">
+                                            {% date_converter post.publish|jformat:'%d %B %Y' %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            {% endwith %}
+                            <br>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <h3 class="followings__title">کاربرانی که دنبال کرده اید:</h3>
+                <div class="followings">
+                    {% for author in following_users %}
+                        <div class="followings__author">
+                            <div class="following__detail">
+                                {% if not request.user == author %}
+                                    <a href="{% url 'blog:user_profile' author.username %}">
+                                        {% if author.photo %}
+                                            <img class="following__img" src="{{ author.photo.url }}" alt="author avatar">
+                                        {% else %}
+                                            <img class="following__img" src="../../static/images/3135768.png" alt="author avatar">
+                                        {% endif %}
+                                    </a>
+
+                                    <p class="following__name">
+                                        <a  href="{% url 'blog:user_profile' author.username %}">
+                                            {{ author.first_name }} {{ author.last_name }}
+                                        </a>
+                                    </p>
+                                {% else %}
+                                    <a href="{% url 'blog:profile' %}">
+                                        {% if author.photo %}
+                                            <img class="following__img" src="{{ author.photo.url }}" alt="author avatar">
+                                        {% else %}
+                                            <img class="following__img" src="../../static/images/3135768.png" alt="author avatar">
+                                        {% endif %}
+                                    </a>
+
+                                    <p class="following__name">
+                                        <a  href="{% url 'blog:profile' %}">
+                                            {{ author.first_name }} {{ author.last_name }}
+                                        </a>
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <p class="following__posts">{% posts_counter author %} پست </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+            <div class="pagination-posts">
+                {% include "partials/pagination.html" with page=posts%}
+            </div>
+
+    </div>
+{% endblock %}
+
+
+
+{#{% extends 'parent/base.html' %}#}
+{#{% block title %}Profile{% endblock %}#}
+{#{% block content %}#}
+{##}
+{#    <p><a href="{% url 'blog:create_post' %}">پست جدید+</a></p>#}
+{##}
+{#<table style="width:80%; border: 1px solid black; text-align: right; direction: rtl;">#}
+{#    <tr>#}
+{#        <th>ردیف</th>#}
+{#        <th>مشاهده</th>#}
+{#        <th>ویرایش</th>#}
+{#        <th>حذف</th>#}
+{#    </tr>#}
+{##}
+{#    {% for post in posts %}#}
+{#        <tr>#}
+{#            <td>{{ forloop.counter }}</td>#}
+{#            <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>#}
+{#            <td><a href="{% url 'blog:edit_post' post.id %}">ویرایش</a></td>#}
+{#            <td><a href="{% url 'blog:delete_post' post.id %}">حذف</a></td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{#    <br>#}
+{#    <a href="{% url 'blog:password_change' %}">تغییر رمز عبور</a>#}
+{#    <br>#}
+{#    <br>#}
+{#    <a href="{% url 'blog:logout' %}">خروج</a>#}
+{#    <br>#}
+{#    <br>#}
+{#    <a href="{% url 'blog:edit_account' %}">ویرایش اطلاعات</a>#}
+{#{% endblock %}#}

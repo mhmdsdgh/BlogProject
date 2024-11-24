@@ -1,0 +1,38 @@
+{% extends 'parent/base.html' %}
+{% load blog_tags %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+ {% endblock %}
+{% block title %}Posts' Comments{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <main class="posts-comments">
+            <div class="popular-posts">
+                <h2 class="posts-comments__title">کامنت ها</h2>
+{#                {% most_popular_posts as pop_posts %}#}
+                <div class="post-comments">
+                    {% for post in posts %}
+    {#                    {{ posts }}#}
+                        {% for cm in post.comments.all %}
+                            <div class="post__comment">
+                                <a href="{{ post.get_absolute_url }}"><h3 class="post__title">{{ post.title }}</h3></a>
+                                <div class="post__comment__name">
+                                    {{ cm.name }}
+                                </div>
+                                <div class="post__comment__body">
+                                    {{ cm.body|linebreaks}}
+                                </div>
+                            </div>
+        {#                : with{{post.comments_count}} comments#}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+        {% include "partials/pagination.html" with page=posts%}
+    </div>
+
+
+{% endblock %}

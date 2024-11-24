@@ -1,0 +1,42 @@
+{% load blog_tags %}
+{% load static %}
+{% load jformat %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts.css' %}">
+ {% endblock %}
+
+<h2 class="latest-posts__title"> آخرین پست ها</h2>
+<div class="latest-posts-bottom">
+    {% for post in l_posts %}
+        {% with post.get_absolute_url as post_url %}
+            <div class="latest-post">
+                <div class="latest-post-right">
+                    <div class="latest-post__img">
+                        <a href="{{ post_url }}">
+                            <img src="{% p_img_src post %}" alt='"{{ post.title }} تصویر پست "' class="latest-post__img">
+                        </a>
+                    </div>
+                    <div class="latest-post__title">
+                        <h4><a href="{{ post_url }}">{{ post.title | censor | truncatechars:60}}</a></h4>
+                    </div>
+                </div>
+
+                <div class="latest-post-left">
+                    <div class="latest-post__author">
+                            <a href="{% url 'blog:user_profile' post.author.username %}" class="post__author">
+                                {{ post.author.first_name }} {{ post.author.last_name }}
+                            </a>
+                    </div>
+                    <div class="latest-post__date">
+                        {% date_converter post.publish|jformat:'%d %B %Y' %}
+                    </div>
+                </div>
+
+            </div>
+        {% endwith %}
+    {% endfor %}
+    {% if l_posts.count > 2 %}
+        <a href="{% url 'blog:post_list' %}">مطالب بیشتر</a>
+    {% endif %}
+</div>
+

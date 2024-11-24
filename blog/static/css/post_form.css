@@ -1,0 +1,99 @@
+.create-post{
+    margin: 3rem ;
+}
+
+.post-form{
+    width: 700px;
+}
+
+.post-form input, select{
+    width: 700px;
+    outline: none;
+    border: 1px solid rgba(128, 128, 128, 0.75);
+    border-radius: 0.2rem;
+    height: 2rem;
+    font-family: Vazir-Light;
+}
+
+#id_tags_helptext{
+    display: none;
+}
+
+#input-submit{
+    width: 6rem;
+    height: 2.5rem;
+    background-color: blue;
+    font-size: 18px;
+    color: white;
+    margin: 2rem auto;
+}
+
+
+.create-ticket{
+    margin: 3rem;
+}
+
+.ticket-form{
+    display: flex;
+    width: 420px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.ticket-form input::placeholder{
+    font-family: Vazir-Light;
+}
+
+.ticket-form input{
+    outline: none;
+    width: 200px;
+    border: 1px solid rgba(128, 128, 128, 0.75);
+    border-radius: 0.2rem;
+    height: 3rem;
+    font-family: Vazir-Light;
+    font-size: 14px;
+}
+
+
+.ticket-message{
+    width: 420px;
+}
+
+.ticket-form__top{
+    width: 420px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticket-form__bottom{
+    width: 420px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#ticket-selection{
+    outline: none;
+    width: 200px;
+    border: 1px solid rgba(128, 128, 128, 0.75);
+    border-radius: 0.2rem;
+    height: 3rem;
+}
+
+#ticket-submit{
+    margin: 1rem 0;
+    border: none;
+    width: 5rem;
+    height: 2rem;
+    background-color: blue;
+    color: white;
+}
+
+#ticket-text{
+    border: 1px solid rgba(128, 128, 128, 0.75);
+    height: 8rem;
+}
+
+#ticket-text::placeholder{
+    font-family: Vazir-Light;
+    font-size: 16px;
+}

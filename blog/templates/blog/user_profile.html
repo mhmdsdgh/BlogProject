@@ -1,0 +1,136 @@
+{% extends 'parent/base.html' %}
+{% load blog_tags %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user_profile.css' %}">
+ {% endblock %}
+{% block title %}post list{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="user-page">
+            <div class="user-profile">
+                <div class="user-profile__right">
+                    <div class="user-profile__avatar">
+                        {% if user.photo %}
+                            <img class="user-profile__img" src="{{ user.photo.url }}" alt="avatar">
+                        {% else %}
+                            <img class="user-profile__img" src="../../static/images/3135768.png" alt="avatar">
+                        {% endif %}
+                        <div class="user-profile__name">
+                            <p>{{ user.first_name }} {{ user.last_name }}</p>
+                        </div>
+                        <div class="follow">
+                            {% if request.user != user %}
+                                {% if not request.user.is_anonymous %}
+                                    <button class="follow-button">
+                                        {% if request.user in user.followers.all %}
+                                            دنبال شده ✔
+                                        {% else %}
+                                            دنبال کنید +
+                                        {% endif %}
+                                    </button>
+                                {% else %}
+                                    <a href="{% url 'blog:login' %}" class="login-link">
+                                        <button class="follow-button">
+                                            {% if request.user in user.followers.all %}
+                                                دنبال شده ✔
+                                            {% else %}
+                                                دنبال کنید +
+                                            {% endif %}
+                                        </button>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                    <div class="user-profile__left">
+                        <div class="user-profile__follow">
+                            {% with total_followers=user.followers.count total_following=user.following.count %}
+                                <span class="followers-count">
+                                    {% date_converter total_followers %}
+                                    <span>دنبال کننده</span>
+                                </span>
+                                <span class="following-count">{% date_converter total_following %} <span>دنبال شونده</span> </span>
+                            {% endwith %}
+                            <span class="posts-count">
+                                {% date_converter posts_count %}
+                                <span> پست منتشر شده</span>
+                            </span>
+                        </div>
+                        {% if user.bio %}
+                            <div class="user-profile__bio">
+                                <p>{{ user.bio }}</p>
+                            </div>
+                        {% endif %}
+                        <div class="social-media">
+                            {% if user.telegram %}
+                                <a href="{{ user.telegram }}"><i class="fa fa-telegram"></i></a>
+                            {% endif %}
+                            {% if user.instagram %}
+                                <a href="{{ user.instagram }}"><i class="fa fa-instagram"></i></a>
+                            {% endif %}
+                            {% if user.website %}
+                                <a href="{{ user.website }}"><i class="fa fa-globe"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+            <div class="user-posts">
+                {% for post in posts %}
+                    <div class="user-post">
+                        <div class="user-post__top">
+                            <div class="user-post__img">
+                                <a href="{{ post.get_absolute_url }}">
+                                    <img src="{% p_img_src post %}" alt='"{{ post.title }} تصویر پست "' class="user-post__img">
+                                </a>
+                            </div>
+
+                            <div class="user-post__title">
+                                <a href="{{ post.get_absolute_url }}">
+                                    <h3>{{ post.title | truncatewords:30}}</h3>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="user-post__bottom">
+                            <div class="user-post__description">
+                                {{ post.content | safe | truncatewords:70}}
+                            </div>
+                            <a href="{{ post.get_absolute_url }}" class="user-post__link"> ادامه مطلب </a>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "partials/pagination.html" with page=posts%}
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function() {
+      $('.follow-button').click(function() {
+          var button = $(this);
+
+          $.ajax({
+              type: 'POST',
+              url: '{% url 'blog:user_follow' %}',
+              data: {'user_id': '{{ user.id }}', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+              success: function(data) {
+                  if (data.follow){
+                      button.text('دنبال شده ✔');
+                  } else {
+                      button.text('دنبال کنید +');
+                  }
+                  $('.followers-count').text(data.followers_count + ' دنبال کننده');
+                  $('.following-count').text(data.following_count + 'دنبال شونده');
+              },
+          });
+      });
+    });
+</script>
+{% endblock %}
+
+

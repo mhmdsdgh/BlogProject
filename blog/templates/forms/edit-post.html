@@ -1,0 +1,29 @@
+{% extends 'parent/base.html' %}
+{% load blog_tags %}
+{% block title %}Create Post{% endblock %}
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+
+        <input type="submit" value="ثبت">
+    </form>
+
+    {% if form.errors %}
+        لطفا خطاهای زیر را اصلاح کنید:
+        <br>
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    {{field.label}} : {{error}}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif%}
+
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+{% endblock %}

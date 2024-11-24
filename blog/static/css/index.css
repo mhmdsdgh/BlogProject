@@ -1,0 +1,116 @@
+.container {
+    max-width: 80rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.index-posts{
+    display: flex;
+    margin-top: 2rem;
+}
+
+.popular-posts{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.popular-posts__title{
+    width: 100%;
+    margin-bottom: -0.5rem;
+}
+
+.index-post{
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 3px 0.8rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    padding-bottom: 0.3rem;
+}
+
+.post__img{
+    width: 420px;
+    height: 275px;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    object-fit: cover;
+}
+
+.post__description,
+.post__title{
+    margin: 0 0.5rem;
+}
+
+.post__description img{
+    display: none;
+}
+
+
+
+.post__description p{
+    margin: 0;
+    font-family: Vazir-Light;
+}
+
+.post__link{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.post__link a{
+    width: 6rem;
+    color: white;
+    background-color: blue;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}
+
+.top-authors{
+    width: 20rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 3px 0.8rem rgba(0, 0, 0, 0.3);
+    padding: 0.3rem 0.5rem;
+    font-size: 14px;
+}
+
+.top-authors__author{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    margin-bottom: 0.4rem;
+}
+
+.top-author__detail{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.top-author__detail a{
+    display: flex;
+}
+
+.top-author__name{
+    font-family: Vazir-Medium;
+}
+
+.top-author__img{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+}
+
+.top-author__posts{
+    font-family: Vazir-Light;
+}
+

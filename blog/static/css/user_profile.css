@@ -1,0 +1,145 @@
+.container {
+    max-width: 80rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.body{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.user-profile{
+    display: flex;
+    width: 50rem;
+    align-items: flex-start;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.3);
+    background-color: rgba(128, 128, 128, 0.2);
+    gap: 1.5rem;
+}
+
+.user-profile__avatar {
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
+}
+
+.user-profile__img{
+    width: 10rem;
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+.user-profile__left{
+    margin: 0 auto;
+    font-family: Vazir-Light;
+}
+
+.user-profile__name{
+    text-align: center;
+}
+
+.user-profile__follow{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 34rem;
+}
+
+.follow-button{
+    display: block;
+    margin: 0 auto;
+    font-family: Vazir-Medium;
+    padding: 0.4rem 2rem;
+    border-radius: 0.5rem;
+    border: 2px #444444 solid;
+    cursor: pointer;
+    /*background-color: rgba(208, 208, 208, 0.9);*/
+}
+
+
+.followers-count,
+.following-count,
+.posts-count {
+    font-family: Vazir-Medium;
+}
+
+.followers-count,
+.following-count,
+.posts-count span{
+    font-size: 14px;
+}
+
+
+.user-profile__bio{
+    font-family: Vazir-Light;
+    font-size: 14px;
+    max-width: 34rem;
+}
+
+.social-media {
+    display: block;
+    text-align: center;
+}
+
+.social-media i{
+    font-size: 1.5rem;
+    margin-left: 0.2rem;
+}
+
+.user-post{
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    padding-bottom: 0.3rem;
+    margin-bottom: 2rem;
+}
+
+.user-post__img{
+    width: 15rem;
+    height: 8rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    box-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.user-post__top{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+}
+
+
+.user-post__description {
+    font-family: Vazir-Light;
+}
+
+.user-post__description img{
+    display: none;
+}
+
+.user-post__link{
+    display: block;
+    width: 6rem;
+    color: white;
+    background-color: blue;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}

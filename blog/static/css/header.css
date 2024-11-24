@@ -1,0 +1,221 @@
+@font-face {
+    font-family: 'Vazir-Bold';
+    src: url("../fonts/woff2/Vazir-Bold.woff2");
+}
+
+@font-face {
+    font-family: 'Vazir-Medium';
+    src: url("../fonts/woff2/Vazir-Medium.woff2");
+}
+
+@font-face {
+    font-family: 'Vazir-Light';
+    src: url("../fonts/woff2/Vazir-Light.woff2");
+}
+
+@font-face {
+    font-family: 'Vazir-Thin';
+    src: url("../fonts/woff2/Vazir-Thin.woff2");
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 80rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+body{
+    font-family: 'Vazir-Medium';
+    margin: 0;
+}
+
+
+.header{
+    background-image: url("../images/UGPhilosophy1600x400.jpg");
+    background-size: cover;
+    padding-bottom: 2rem;
+    box-shadow: 0 1px 1.5rem 1px;
+}
+
+.header__heading{
+    color: rgb(243, 243, 243);
+    padding: 0.2rem 1rem;
+    background-image: linear-gradient(to bottom,rgba(128, 128, 128, 0.6), rgba(158, 158, 158, 0.2));
+    border-radius: 0.8rem;
+    text-shadow: 3px 3px 5px black;
+}
+
+.header-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-top__left{
+    display: flex;
+}
+
+.search{
+    margin-left: 0.5rem;
+}
+
+.search-bar{
+    /*display: flex;*/
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+}
+
+.search__text{
+    /*display: block;*/
+    height: 50px;
+    width: 50px;
+    outline: none;
+    border: none;
+    /*border-bottom-right-radius: 0.5rem;*/
+    /*border-top-right-radius: 0.5rem;*/
+    border-radius: 1rem;
+    /*background-color: lightgray;*/
+    /*margin-left: 0.2rem;*/
+    transition: all .5s ease-in-out;
+}
+
+.search__text:focus{
+    font-family: Vazir-Light;
+    text-align: left;
+}
+
+.search__text::placeholder{
+    font-family: sans-serif;
+    text-align: left;
+}
+
+.search__btn{
+    /*display: block;*/
+    width: 50px;
+    height: 50px;
+    outline: none;
+    border: none;
+    /*background-color: lightgray;*/
+    /*border-bottom-left-radius: 0.5rem;*/
+    /*border-top-left-radius: 0.5rem;*/
+    border-radius: 1rem;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.search__btn:focus{
+    background-color:transparent;
+
+}
+
+.search__btn:focus ~ .search__text{
+    width: 175px;
+    border-radius: 1rem;
+    /*background-color: transparent;*/
+    border-bottom:1px solid rgba(255,255,255,.5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+.search__text:focus{
+    width: 175px;
+    border-radius: 1rem;
+    /*background-color: transparent;*/
+    border-bottom:1px solid rgba(255,255,255,.5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+.header-login,
+.header-profile{
+    height: 3rem;
+    padding: 0 0.5rem;
+    background-color: #0059ff;
+    border-radius: 0.5rem;
+    text-align: center;
+    line-height: 3rem;
+}
+
+.header-login{
+    width: 4rem;
+}
+
+.header-login__link,
+.header-profile__link{
+    text-decoration: none;
+    color: white;
+}
+
+.header-nav{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-around;
+    /*background-color: rgba(84, 110, 122, 0.5);*/
+    background-image: linear-gradient(to bottom,rgba(128, 128, 128, 0.6), rgba(158, 158, 158, 0.2));
+    /*background-color: rgba(128, 128, 128, 0.5);*/
+    border-radius: 0.8rem;
+}
+
+.nav-menu{
+    position: absolute;
+    /*background-image: linear-gradient(to bottom , rgba(128, 128, 128, 0.8), rgba(121, 55, 0, 0.6));*/
+    background-color: rgba(128, 128, 128, 0.90);
+    padding: 0 0.5rem;
+    border-radius: 0.5rem;
+    visibility: hidden;
+    box-shadow: 0 2px 1rem rgba(0, 0, 0, 0.8);
+    transition: all 120ms ease 80ms;
+    opacity: 0;
+}
+
+#nav-menu1{
+    width: 9rem;
+}
+
+.nav-ctg:hover .nav-menu{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0.5rem);
+}
+
+.nav-ctg:hover .nav-ctg__text i{
+    transform: rotate(180deg);
+}
+
+.nav-menu ul{
+    list-style-type: none;
+    list-style-position: unset;
+    margin: 0;
+    padding: 0.5rem 0;
+}
+
+.nav-menu li{
+    margin: 0.3rem 0;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.nav-menu a{
+    color: white;
+    text-decoration: none;
+    text-shadow: 3px 3px 5px black;
+}
+
+.nav-ctg__text{
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    gap: 0.5rem;
+    color: AliceBlue;
+    text-shadow: 3px 3px 5px black;
+}
+
+.nav-ctg__text i{
+    transition: all 120ms ease 80ms;
+}

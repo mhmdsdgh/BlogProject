@@ -1,0 +1,96 @@
+.parent{
+    display: flex;
+    align-items: center;
+}
+
+.login{
+    margin: 3rem auto;
+    width: 22rem;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.register{
+    margin: 3rem auto;
+    width: 50rem;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.login-title{
+    text-align: center;
+}
+
+.login-form,
+.register-form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.login-form p,
+.register-form p{
+    margin-top: 0;
+    display: grid;
+}
+
+.login-form p{
+    width: 100%;
+}
+
+.login-form input,
+.register-form input{
+    outline: none;
+    border: 1px solid rgba(128, 128, 128, 0.75);
+    border-radius: 0.2rem;
+    height: 2rem;
+    font-family: Vazir-Light;
+    font-size: 14px;
+    margin-top: 0.5rem;
+}
+
+.register-form input{
+    width: 20rem;
+}
+
+#login-submit{
+    width: 6rem;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.links{
+    font-size: 14px;
+    font-family: Vazir-Light;
+}
+
+#id_username_helptext{
+    display: none;
+}
+
+.register-heading,
+.register-title{
+    text-align: center;
+}
+
+#register-submit{
+    height: 3rem;
+    width: 8rem;
+}
+
+#login-link{
+    font-size: 16px;
+}
+
+/*#id_bio,*/
+/*#id_id_date_of_birth,*/
+/*#id_job,*/
+/*#id_telegram,*/
+/*#id_instagram,*/
+/*#id_website,*/
+/*#id_photo{*/
+/*    display: none;*/
+/*}*/
+

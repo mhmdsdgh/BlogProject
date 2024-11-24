@@ -1,0 +1,17 @@
+{% load static %}
+{% load blog_tags %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>blog | {% block title %} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    {% block extrahead %} {% endblock %}
+</head>
+<body>
+{% include 'partials/header.html'%}
+{% include 'partials/navigation.html'%}
+{% block content %} {% endblock %}
+{% footer_tags %}
+</body>
+</html>
